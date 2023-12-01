@@ -28,7 +28,7 @@ func calculateSumCalibrationValues(r io.Reader) int {
 		line := scanner.Text()
 		sum = sum + calibrationValue(line)
 	}
-	
+
 	return sum
 }
 
@@ -37,7 +37,7 @@ func calibrationValue(line string) int {
 
 	for _, r := range []rune(line) {
 		if (r >= '0') && (r <= '9') {
-			digits = append(digits, int(r - '0'))
+			digits = append(digits, int(r-'0'))
 		}
 	}
 
@@ -45,5 +45,5 @@ func calibrationValue(line string) int {
 		return 0
 	}
 
-	return (10*digits[0]) + digits[len(digits)-1]
+	return (10 * digits[0]) + digits[len(digits)-1]
 }

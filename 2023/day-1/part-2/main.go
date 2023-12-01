@@ -55,31 +55,40 @@ func calibrationValue(line string, digits []int) int {
 			return calibrationValue(line[1:], digits)
 		case strings.HasPrefix(line, one):
 			digits = append(digits, 1)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(one)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, two):
 			digits = append(digits, 2)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(two)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, three):
 			digits = append(digits, 3)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(three)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, four):
 			digits = append(digits, 4)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(four)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, five):
 			digits = append(digits, 5)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(five)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, six):
 			digits = append(digits, 6)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(six)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, seven):
 			digits = append(digits, 7)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(seven)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, eight):
 			digits = append(digits, 8)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(eight)-1
+			return calibrationValue(line[trimLength:], digits)
 		case strings.HasPrefix(line, nine):
 			digits = append(digits, 9)
-			return calibrationValue(line[1:], digits)
+			trimLength := len(nine)-1
+			return calibrationValue(line[trimLength:], digits)
 		default:
 			return calibrationValue(line[1:], digits)
 		}

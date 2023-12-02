@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bytes"
+	"strings"
 	"testing"
 )
 
@@ -14,9 +14,9 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 `
 
 func TestSumOfGameIDs(t *testing.T) {
-	buf := bytes.NewBufferString(testStr)
+	games := strings.Split(testStr, "\n")
 
-	got, err := sumOfGameIDs(buf)
+	got, err := sumOfGameIDs(games)
 	if err != nil {
 		t.Fatalf("Received an error after running sumOfGameIDs(); %v\n", err)
 	}
@@ -29,9 +29,9 @@ func TestSumOfGameIDs(t *testing.T) {
 }
 
 func TestSumOfThePowerOfTheCubes(t *testing.T) {
-	buf := bytes.NewBufferString(testStr)
+	games := strings.Split(testStr, "\n")
 
-	got, err := sumOfThePowerOfTheCubes(buf)
+	got, err := sumOfThePowerOfTheCubes(games)
 	if err != nil {
 		t.Fatalf("Received an error after running sumOfThePowerOfTheCubes(); %v\n", err)
 	}

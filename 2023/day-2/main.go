@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"log"
 	"os"
 )
@@ -11,26 +10,19 @@ import (
 func main() {
 	filename := "2023/day-2/files/input"
 
-	file1, err := os.Open(filename)
+	games, err := readFile(filename)
 	if err != nil {
-		log.Fatalf("ERROR: unable to open %s, %v\n", filename, err)
+		log.Fatalf("ERROR: unable to read from %s, %v\n", filename, err)
 	}
-	defer file1.Close()
 
-	sumOfIDs, err := sumOfGameIDs(file1)
+	sumOfIDs, err := sumOfGameIDs(games)
 	if err != nil {
 		log.Fatalf("ERROR: unable to calculate the sum of the IDs of the valid games; %v\n", err)
 	}
 
 	fmt.Printf("Total sum of the IDs of the valid games: %d\n", sumOfIDs)
 
-	file2, err := os.Open(filename)
-	if err != nil {
-		log.Fatalf("ERROR: unable to open %s, %v\n", filename, err)
-	}
-	defer file2.Close()
-
-	sumOfPower, err := sumOfThePowerOfTheCubes(file2)
+	sumOfPower, err := sumOfThePowerOfTheCubes(games)
 	if err != nil {
 		log.Fatalf("ERROR: unable to calculate the sum of the power of cubes; %v\n", err)
 	}
@@ -39,19 +31,15 @@ func main() {
 }
 
 // sumOfGameIDs solves Part 1
-func sumOfGameIDs(r io.Reader) (int, error) {
-	scanner := bufio.NewScanner(r)
-
+func sumOfGameIDs(content []string) (int, error) {
 	sum := 0
 
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		if len(line) == 0 {
+	for i := range content {
+		if len(content[i]) == 0 {
 			continue
 		}
 
-		game, err := parseGame(line)
+		game, err := parseGame(content[i])
 		if err != nil {
 			return 0, fmt.Errorf("unable to parse %q; %w", game, err)
 		}
@@ -59,29 +47,22 @@ func sumOfGameIDs(r io.Reader) (int, error) {
 		if validGame(game.Sets) {
 			sum = sum + game.ID
 		}
-	}
 
-	if err := scanner.Err(); err != nil {
-		return 0, fmt.Errorf("received an error after scanning file; %w", err)
 	}
 
 	return sum, nil
 }
 
 // sumOfThePowerOfTheCubes solves Part 2
-func sumOfThePowerOfTheCubes(r io.Reader) (int, error) {
-	scanner := bufio.NewScanner(r)
-
+func sumOfThePowerOfTheCubes(content []string) (int, error) {
 	sum := 0
 
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		if len(line) == 0 {
+	for i := range content {
+		if len(content[i]) == 0 {
 			continue
 		}
 
-		game, err := parseGame(line)
+		game, err := parseGame(content[i])
 		if err != nil {
 			return 0, fmt.Errorf("unable to parse %q; %w", game, err)
 		}
@@ -89,10 +70,6 @@ func sumOfThePowerOfTheCubes(r io.Reader) (int, error) {
 		fewestCubeSet := fewestSet(game.Sets)
 
 		sum = sum + (fewestCubeSet.Red * fewestCubeSet.Green * fewestCubeSet.Blue)
-	}
-
-	if err := scanner.Err(); err != nil {
-		return 0, fmt.Errorf("received an error after scanning file; %w", err)
 	}
 
 	return sum, nil
@@ -137,4 +114,22 @@ func fewestSet(sets []Set) Set {
 	}
 
 	return result
+}
+
+func readFile(filename string) ([]string, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, fmt.Errorf("unable to open %s, %w", filename, err)
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	var content []string
+
+	for scanner.Scan() {
+		content = append(content, scanner.Text())
+	}
+
+	return content, nil
 }

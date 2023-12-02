@@ -13,14 +13,8 @@ func TestParseGame(t *testing.T) {
 		{
 			testGame: "Game1: 10 green, 1 blue, 7red",
 			want: Game{
-				ID: 1,
-				Sets: []Set{
-					{
-						Red:   7,
-						Green: 10,
-						Blue:  1,
-					},
-				},
+				ID:   1,
+				Sets: []Set{{Red: 7, Green: 10, Blue: 1}},
 			},
 		},
 		{
@@ -28,21 +22,9 @@ func TestParseGame(t *testing.T) {
 			want: Game{
 				ID: 100,
 				Sets: []Set{
-					{
-						Red:   20,
-						Green: 8,
-						Blue:  6,
-					},
-					{
-						Red:   4,
-						Green: 13,
-						Blue:  5,
-					},
-					{
-						Red:   1,
-						Green: 5,
-						Blue:  0,
-					},
+					{Red: 20, Green: 8, Blue: 6},
+					{Red: 4, Green: 13, Blue: 5},
+					{Red: 1, Green: 5, Blue: 0},
 				},
 			},
 		},

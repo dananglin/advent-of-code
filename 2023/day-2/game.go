@@ -80,7 +80,7 @@ func parseSets(str string) ([]Set, error) {
 					return nil, fmt.Errorf("unable to run strconv.Atoi() on %s; %w", i, err)
 				}
 				set.Green = value
-			case strings.HasSuffix(i, "blue"):
+			case strings.HasSuffix(i, blue):
 				value, err := strconv.Atoi(strings.TrimSuffix(i, blue))
 				if err != nil {
 					return nil, fmt.Errorf("unable to run strconv.Atoi() on %s; %w", i, err)

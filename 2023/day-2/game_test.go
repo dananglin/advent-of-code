@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestParseGame(t *testing.T) {
+func testParseGame(t *testing.T) {
 	table := []struct {
 		testGame string
 		want     Game

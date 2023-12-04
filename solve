@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+function usage {
+    echo "USAGE:"
+    echo "  $0 [options]"
+    echo ""
+    echo "SUMMARY:"
+    echo "  Run the solution for the specified Advent of Code challenge"
+    echo ""
+    echo "OPTIONS:"
+    echo "  -h, --help:"
+    echo "    print this help message"
+    echo ""
+    echo "  -y, --year:"
+    echo "    specify the year"
+    echo ""
+    echo "  -d, --day:"
+    echo "    specify the day of the advent calendar"
+}
+
+while [[ $# -gt 0 ]]; do
+    arg="$1"
+    case $arg in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -y|--year)
+            YEAR=$2
+            shift
+            shift
+            ;;
+        -d|--day)
+            DAY=$2
+            shift
+            shift
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
+if [[ -z "${YEAR+x}" ]]; then
+    echo "ERROR: please specify the year."
+    echo ""
+    usage
+    exit 1
+fi
+
+if [[ -z "${DAY+x}" ]]; then
+    echo "ERROR: please specify the day."
+    echo ""
+    usage
+    exit 1
+fi
+
+go run "./${YEAR}/day-${DAY}"

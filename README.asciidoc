@@ -1,8 +1,37 @@
 = Advent of Code
 
-My solutions to the https://adventofcode.com[Advent of Code] challenges.
+My solutions to the https://adventofcode.com[Advent of Code] challenges in Go.
 
 == Mirrors
 
 - **Code Flow (Forgejo)**: https://codeflow.dananglin.me.uk/apollo/advent-of-code
 - **GitHub**: https://github.com/dananglin/advent-of-code
+
+== How to run the solutions
+
+1. Download and install Go if you don't have it installed already.
+
+2. The provided bash script can be used to run the solution to an AoC challenge.
++
+....
+$ ./solve --help
+USAGE:
+  ./solve [options]
+
+SUMMARY:
+  Run the solution for the specified Advent of Code challenge
+
+OPTIONS:
+  -h, --help:
+    print this help message
+
+  -y, --year:
+    specify the year
+
+  -d, --day:
+    specify the day of the advent calendar
+....
+
+3. Run the script specifying the year and the day of the advent calendar to view the result of that day's challenge.
+
+    ./solve --year 2023 --day 1

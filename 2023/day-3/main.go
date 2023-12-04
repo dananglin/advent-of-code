@@ -14,7 +14,7 @@ const (
 	potentialGear = '*'
 )
 
-type answer struct {
+type solution struct {
 	sumOfValidEnginePartNumbers int
 	sumOfGearRatios             int
 }
@@ -34,7 +34,7 @@ func main() {
 	fmt.Printf("[Part 2] The sum of all Gear Ratios: %d\n", answer.sumOfGearRatios)
 }
 
-func fixTheGondola(schematic []string) (answer, error) {
+func fixTheGondola(schematic []string) (solution, error) {
 	var (
 		partNumSum          = 0
 		partNum             = ""
@@ -52,49 +52,49 @@ func fixTheGondola(schematic []string) (answer, error) {
 				if !validPartNum {
 					switch {
 					// check above left
-					case ((y - 1) >= 0) && ((x - 1) >= 0) && !unicode.IsDigit(rune(schematic[y-1][x-1])) && (schematic[y-1][x-1] != dot):
+					case ((y - 1) >= 0) && ((x - 1) >= 0) && isSymbol(rune(schematic[y-1][x-1])):
 						validPartNum = true
 						if schematic[y-1][x-1] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y-1, x-1)
 						}
 					// check straight above
-					case ((y - 1) >= 0) && !unicode.IsDigit(rune(schematic[y-1][x])) && (schematic[y-1][x] != dot):
+					case ((y - 1) >= 0) && isSymbol(rune(schematic[y-1][x])):
 						validPartNum = true
 						if schematic[y-1][x] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y-1, x)
 						}
 					// check above right
-					case ((y - 1) >= 0) && ((x + 1) <= maxX) && !unicode.IsDigit(rune(schematic[y-1][x+1])) && (schematic[y-1][x+1] != dot):
+					case ((y - 1) >= 0) && ((x + 1) <= maxX) && isSymbol(rune(schematic[y-1][x+1])):
 						validPartNum = true
 						if schematic[y-1][x+1] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y-1, x+1)
 						}
 					// check left
-					case ((x - 1) >= 0) && !unicode.IsDigit(rune(schematic[y][x-1])) && (schematic[y][x-1] != dot):
+					case ((x - 1) >= 0) && isSymbol(rune(schematic[y][x-1])):
 						validPartNum = true
 						if schematic[y][x-1] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y, x-1)
 						}
 					// check right
-					case ((x + 1) <= maxX) && !unicode.IsDigit(rune(schematic[y][x+1])) && (schematic[y][x+1] != dot):
+					case ((x + 1) <= maxX) && isSymbol(rune(schematic[y][x+1])):
 						validPartNum = true
 						if schematic[y][x+1] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y, x+1)
 						}
 					// check below left
-					case ((y + 1) <= maxY) && ((x - 1) >= 0) && !unicode.IsDigit(rune(schematic[y+1][x-1])) && (schematic[y+1][x-1] != dot):
+					case ((y + 1) <= maxY) && ((x - 1) >= 0) && isSymbol(rune(schematic[y+1][x-1])):
 						validPartNum = true
 						if schematic[y+1][x-1] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y+1, x-1)
 						}
 					// check straight below
-					case ((y + 1) <= maxY) && !unicode.IsDigit(rune(schematic[y+1][x])) && (schematic[y+1][x] != dot):
+					case ((y + 1) <= maxY) && isSymbol(rune(schematic[y+1][x])):
 						validPartNum = true
 						if schematic[y+1][x] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y+1, x)
 						}
 					// check below right
-					case ((y + 1) <= maxY) && ((x + 1) <= maxX) && !unicode.IsDigit(rune(schematic[y+1][x+1])) && (schematic[y+1][x+1] != dot):
+					case ((y + 1) <= maxY) && ((x + 1) <= maxX) && isSymbol(rune(schematic[y+1][x+1])):
 						validPartNum = true
 						if schematic[y+1][x+1] == potentialGear {
 							potentialGearPos = fmt.Sprintf("%d-%d", y+1, x+1)
@@ -105,7 +105,7 @@ func fixTheGondola(schematic []string) (answer, error) {
 				if validPartNum {
 					value, err := strconv.Atoi(partNum)
 					if err != nil {
-						return answer{}, fmt.Errorf("unable to convert %q to int; %w", partNum, err)
+						return solution{}, fmt.Errorf("unable to convert %q to int; %w", partNum, err)
 					}
 					partNumSum = partNumSum + value
 
@@ -130,12 +130,12 @@ func fixTheGondola(schematic []string) (answer, error) {
 		}
 	}
 
-	ans := answer{
+	answer := solution{
 		sumOfValidEnginePartNumbers: partNumSum,
 		sumOfGearRatios:             sumGearRatios,
 	}
 
-	return ans, nil
+	return answer, nil
 }
 
 func engineSchematic(filename string) ([]string, error) {
@@ -152,4 +152,8 @@ func engineSchematic(filename string) ([]string, error) {
 	}
 
 	return lines, nil
+}
+
+func isSymbol(r rune) bool {
+	return !unicode.IsDigit(r) && (r != dot)
 }

@@ -36,7 +36,7 @@ func testFixTheGondola(schematic []string) func(t *testing.T) {
 			t.Fatalf("Received an error after running sumOfValidEnginePartNumbers(); %v\n", err)
 		}
 
-		want := answer{
+		want := solution{
 			sumOfValidEnginePartNumbers: 4361,
 			sumOfGearRatios: 467835,
 		}

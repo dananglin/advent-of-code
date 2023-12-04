@@ -38,7 +38,7 @@ func testFixTheGondola(schematic []string) func(t *testing.T) {
 
 		want := solution{
 			sumOfValidEnginePartNumbers: 4361,
-			sumOfGearRatios: 467835,
+			sumOfGearRatios:             467835,
 		}
 
 		if !reflect.DeepEqual(want, got) {

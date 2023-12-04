@@ -6,6 +6,7 @@ import (
 )
 
 func TestDay1Trebuchet(t *testing.T) {
+	t.Logf("This is the test suite for Advent of Code - Day 1 - Trebuchet?!")
 	t.Run("Test the solution for Part 1", testPartOneCalculateSumCalibrationValues)
 	t.Run("Test the solution for Part 2", testPartTwoCalculateSumCalibrationValues)
 }

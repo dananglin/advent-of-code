@@ -1,12 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"unicode"
+
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
 )
 
 const (
@@ -20,7 +20,7 @@ type solution struct {
 }
 
 func main() {
-	schematic, err := engineSchematic("2023/day-3/files/input")
+	schematic, err := common.ReadFile("2023/day-3/files/input")
 	if err != nil {
 		log.Fatalf("ERROR: Unable to retrieve the engine schematic; %v\n", err)
 	}
@@ -136,22 +136,6 @@ func fixTheGondola(schematic []string) (solution, error) {
 	}
 
 	return answer, nil
-}
-
-func engineSchematic(filename string) ([]string, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, fmt.Errorf("unable to open %q; %w", filename, err)
-	}
-
-	scanner := bufio.NewScanner(file)
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	return lines, nil
 }
 
 func isSymbol(r rune) bool {

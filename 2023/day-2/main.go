@@ -1,16 +1,16 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
-	"os"
+
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
 )
 
 func main() {
 	filename := "2023/day-2/files/input"
 
-	games, err := readFile(filename)
+	games, err := common.ReadFile(filename)
 	if err != nil {
 		log.Fatalf("ERROR: unable to read from %s, %v\n", filename, err)
 	}
@@ -114,22 +114,4 @@ func fewestSet(sets []Set) Set {
 	}
 
 	return result
-}
-
-func readFile(filename string) ([]string, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, fmt.Errorf("unable to open %s, %w", filename, err)
-	}
-
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var content []string
-
-	for scanner.Scan() {
-		content = append(content, scanner.Text())
-	}
-
-	return content, nil
 }

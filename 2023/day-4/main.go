@@ -1,12 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"strings"
 	"unicode"
+
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
 )
 
 type cardResult struct {
@@ -20,7 +20,7 @@ type solution struct {
 }
 
 func main() {
-	cards, err := cardPack("2023/day-4/files/input")
+	cards, err := common.ReadFile("2023/day-4/files/input")
 	if err != nil {
 		log.Fatalf("ERROR: Unable to retrieve the pack of scratchcards; %v\n", err)
 	}
@@ -148,25 +148,4 @@ func cardScore(card string) (cardResult, error) {
 	}
 
 	return result, nil
-}
-
-func cardPack(filename string) ([]string, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, fmt.Errorf("unable to open %q; %w", filename, err)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var cards []string
-
-	for scanner.Scan() {
-		cards = append(cards, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, fmt.Errorf("error scanning %q; %w", filename, err)
-	}
-
-	return cards, nil
 }

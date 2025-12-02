@@ -8,7 +8,7 @@ import (
 
 func TestDay1SecretEntrance(t *testing.T) {
 	t.Log("This is the test suite for the [2025] Advent of Code - Day 1 - Secret Entrance")
-	t.Run("Test the solution for Part 1", testCalculateSecretEntranceCode)
+	t.Run("Test Calculate Secret Entrance Code", testCalculateSecretEntranceCode)
 }
 
 func testCalculateSecretEntranceCode(t *testing.T) {

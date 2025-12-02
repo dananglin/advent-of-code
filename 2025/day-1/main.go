@@ -17,7 +17,7 @@ func main() {
 		)
 	}
 
-	partOneSecretEntranceCode, err := calculateSecretEntranceCode(data)
+	secretEntranceCode, err := calculateSecretEntranceCode(data)
 	if err != nil {
 		utilities.Fatal(
 			"Unable to calculate the code to the secret entrance",
@@ -25,5 +25,5 @@ func main() {
 		)
 	}
 
-	fmt.Printf("[Part 1] Code to the secret entrance: %d\n", partOneSecretEntranceCode)
+	fmt.Printf("The code to the secret entrance: %d\n", secretEntranceCode)
 }

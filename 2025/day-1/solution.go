@@ -33,9 +33,6 @@ func calculateSecretEntranceCode(data []string) (int, error) {
 		code:      0,
 	}
 
-	fmt.Println("[DEBUG] The dial is starting at:", processed.dialValue)
-	fmt.Println("[DEBUG] The current code is:", processed.code)
-
 	for idx := range data {
 		processed, err = processRotation(processed, data[idx])
 		if err != nil {
@@ -45,17 +42,12 @@ func calculateSecretEntranceCode(data []string) (int, error) {
 				err,
 			)
 		}
-
-		fmt.Println("[DEBUG] The dial is currently pointing at:", processed.dialValue)
-		fmt.Println("[DEBUG] The current code is:", processed.code)
 	}
 
 	return processed.code, nil
 }
 
 func processRotation(processed processedSecretEntrance, data string) (processedSecretEntrance, error) {
-	fmt.Println("[DEBUG] Move instruction:", data)
-
 	move := right
 
 	if strings.HasPrefix(strings.ToLower(data), "l") {
@@ -71,8 +63,6 @@ func processRotation(processed processedSecretEntrance, data string) (processedS
 	for dist > maxDist {
 		dist -= maxDist
 		processed.code += 1
-
-		fmt.Println("[DEBUG] The dial passed \"0\" 1x during this rotation.")
 	}
 
 	oldDialVal := processed.dialValue
@@ -83,16 +73,13 @@ func processRotation(processed processedSecretEntrance, data string) (processedS
 		processed.dialValue = (maxVal + 1) - (minVal - dialVal)
 		if oldDialVal != 0 {
 			processed.code += 1
-			fmt.Println("[DEBUG] The dial passed the min value during this rotation.")
 		}
 	case dialVal > maxVal:
 		processed.dialValue = (minVal - 1) + (dialVal - maxVal)
 		processed.code += 1
-		fmt.Println("[DEBUG] The dial passed the max value during this rotation.")
 	case dialVal == 0:
 		processed.dialValue = dialVal
 		processed.code += 1
-		fmt.Println("[DEBUG] The dial is currently pointing at \"0\".")
 	default:
 		processed.dialValue = dialVal
 	}

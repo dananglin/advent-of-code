@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"unicode"
 
-	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/utilities"
 )
 
 const (
@@ -20,7 +20,7 @@ type solution struct {
 }
 
 func main() {
-	schematic, err := common.ReadFile("2023/day-3/files/input")
+	schematic, err := utilities.ReadFile("2023/day-3/files/input")
 	if err != nil {
 		log.Fatalf("ERROR: Unable to retrieve the engine schematic; %v\n", err)
 	}

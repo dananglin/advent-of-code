@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"log"
 
-	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/utilities"
 )
 
 func main() {
-	document, err := common.ReadFile("2023/day-1/files/input")
+	document, err := utilities.ReadFile("2023/day-1/files/input")
 	if err != nil {
 		log.Fatalf("Error: Unable to retrieve the calibration document; %v", err)
 	}

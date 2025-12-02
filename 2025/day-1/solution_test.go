@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/utilities"
 )
 
 func TestDay1SecretEntrance(t *testing.T) {
@@ -14,7 +14,7 @@ func TestDay1SecretEntrance(t *testing.T) {
 func testCalculateSecretEntranceCode(t *testing.T) {
 	filename := "files/test"
 
-	data, err := common.ReadFile(filename)
+	data, err := utilities.ReadFile(filename)
 	if err != nil {
 		t.Fatalf("Error reading the test data from %s: %v", filename, err)
 	}

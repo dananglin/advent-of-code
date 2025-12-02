@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"log"
 
-	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/utilities"
 )
 
 func main() {
 	filename := "2023/day-2/files/input"
 
-	games, err := common.ReadFile(filename)
+	games, err := utilities.ReadFile(filename)
 	if err != nil {
 		log.Fatalf("ERROR: unable to read from %s, %v\n", filename, err)
 	}

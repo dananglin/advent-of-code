@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode"
 
-	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/utilities"
 )
 
 type cardResult struct {
@@ -20,7 +20,7 @@ type solution struct {
 }
 
 func main() {
-	cards, err := common.ReadFile("2023/day-4/files/input")
+	cards, err := utilities.ReadFile("2023/day-4/files/input")
 	if err != nil {
 		log.Fatalf("ERROR: Unable to retrieve the pack of scratchcards; %v\n", err)
 	}

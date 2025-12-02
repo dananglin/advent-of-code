@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 
-	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/common"
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/utilities"
 )
 
 func main() {
 	filename := "2025/day-1/files/input"
 
-	data, err := common.ReadFile(filename)
+	data, err := utilities.ReadFile(filename)
 	if err != nil {
-		common.Fatal(
+		utilities.Fatal(
 			"Unable to read the data from "+filename,
 			err,
 		)
@@ -19,7 +19,7 @@ func main() {
 
 	partOneSecretEntranceCode, err := calculateSecretEntranceCode(data)
 	if err != nil {
-		common.Fatal(
+		utilities.Fatal(
 			"Unable to calculate the code to the secret entrance",
 			err,
 		)

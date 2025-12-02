@@ -1,8 +1,10 @@
-package common
+package utilities_test
 
 import (
 	"reflect"
 	"testing"
+
+	"codeflow.dananglin.me.uk/apollo/advent-of-code/internal/utilities"
 )
 
 func TestParseIntList(t *testing.T) {
@@ -21,7 +23,7 @@ func TestParseIntList(t *testing.T) {
 	}
 
 	for i := range table {
-		got, err := ParseIntList(table[i].list)
+		got, err := utilities.ParseIntList(table[i].list)
 		if err != nil {
 			t.Fatalf("received an error after running ParseIntList(); %v", err)
 		}

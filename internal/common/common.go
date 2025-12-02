@@ -63,3 +63,9 @@ func ParseIntList(line string) ([]int, error) {
 
 	return values, nil
 }
+
+func Fatal(msg string, err error) {
+	fmt.Printf("ERROR: %s: %v.\n", msg, err)
+
+	os.Exit(1)
+}

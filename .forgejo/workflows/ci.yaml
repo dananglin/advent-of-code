@@ -1,0 +1,25 @@
+---
+name: "CI"
+
+on:
+  pull_request:
+    branches:
+    - "main"
+    types:
+    - "opened"
+    - "synchronize"
+
+jobs:
+  ci:
+    name: "CI"
+    if: "${{ ! forgejo.event.pull_request.draft }}"
+    runs-on: docker
+    container:
+      image: "golang:1.25.4-trixie"
+      volumes:
+      - "go-mod-cache:/go/pkg/mod"
+    steps:
+    - name: "Checkout the repository"
+      uses: "https://github.com/taiki-e/checkout-action@699545516363ce4a3728c1cb579dd77bfbf1d7f3" # 2025-10-11
+    - name: "Run the tests"
+      run: "go test -v ./..."
